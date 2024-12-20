@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  </head>
+  <body class="bg-white text-gray-800">
+    <div class="max-w-4xl mx-auto p-6">
+      <!-- Header Section -->
+      <div class="flex items-center bg-blue-900 text-white p-6 rounded-t-lg">
+        <div class="flex-shrink-0">
+          <img
+            alt="Profile picture of Maida"
+            class="w-24 h-24 rounded-full border-4 border-white"
+            id="profilePicture"
+          />
+        </div>
+        <div class="ml-6">
+          <h1 class="text-4xl font-bold" id="name"></h1>
+          <p class="text-lg" id="position"></p>
+        </div>
+      </div>
+      <div class="bg-blue-900 text-white p-6 rounded-b-lg mt-1">
+        <div class="flex items-center">
+          <i class="fas fa-map-marker-alt mr-2"></i>
+          <span id="location"></span>
+        </div>
+        <div class="flex items-center mt-2">
+          <i class="fas fa-phone-alt mr-2"></i>
+          <span id="phone"></span>
+        </div>
+        <div class="flex items-center mt-2">
+          <i class="fas fa-envelope mr-2"></i>
+          <span id="email"></span>
+        </div>
+      </div>
+      <!-- Summary Section -->
+      <div class="mt-6">
+        <h2 class="text-xl font-bold">RINGKASAN</h2>
+        <hr class="border-t-2 border-gray-300 my-2" />
+        <p id="summary"></p>
+      </div>
+      <!-- Skills and Experience Section -->
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h2 class="text-xl font-bold">KETERAMPILAN</h2>
+          <hr class="border-t-2 border-gray-300 my-2" />
+          <h3 class="font-semibold">Teknis</h3>
+          <ul id="technicalSkills" class="list-disc list-inside"></ul>
+          <h3 class="font-semibold mt-4">Nonteknis</h3>
+          <ul id="nonTechnicalSkills" class="list-disc list-inside"></ul>
+        </div>
+        <div>
+          <h2 class="text-xl font-bold">PENGALAMAN KERJA</h2>
+          <hr class="border-t-2 border-gray-300 my-2" />
+          <div id="workExperience"></div>
+        </div>
+      </div>
+      <!-- Education Section -->
+      <div class="mt-6">
+        <h2 class="text-xl font-bold">PENDIDIKAN</h2>
+        <hr class="border-t-2 border-gray-300 my-2" />
+        <div id="education"></div>
+      </div>
+      <!-- Organization Section -->
+      <div class="mt-6">
+        <h2 class="text-xl font-bold">ORGANISASI</h2>
+        <hr class="border-t-2 border-gray-300 my-2" />
+        <div id="organizations"></div>
+      </div>
+    </div>
+
+    <script>
+      const resumeData = {
+        "profile": {
+          "name": "Maida",
+          "position": "Mahasiswa",
+          "photo_url": "https://i.pinimg.com/736x/8b/8b/3b/8b8b3b3db97bcdc6e7f53ff2fbf62aa0.jpg",
+          "contact": {
+            "location": "Kabupaten Tangerang",
+            "phone": "0831-1042-0529",
+            "email": "Maida050530@gmail.com"
+          }
+        },
+        "summary": "Saya seorang mahasiswa aktif Universitas Yatsi Madani, jurusan Ilmu Komputer. Saya tertarik pada bidang kecerdasan buatan dan sedang fokus pada keterampilan tersebut.",
+        "skills": {
+          "technical": ["Word", "Excel", "PPT", "HTML", "PHP", "Python"],
+          "non_technical": ["Komunikasi persuasif", "Kerja sama tim", "Kepekaan", "Manajemen waktu"]
+        },
+        "work_experience": [
+          {
+            "company": "PT Indoku Hesa Maju Jaya",
+            "location": "Kabupaten Tangerang",
+            "position": "Operator Produksi",
+            "duration": "Juli 2023 – Sekarang",
+            "responsibilities": [
+              "Memastikan produksi berjalan dengan semestinya"
+            ]
+          }
+        ],
+        "education": [
+          {
+            "institution": "SMAN 8 Kabupaten Tangerang",
+            "location": "Kabupaten Tangerang",
+            "program": "Jurusan IPS",
+            "duration": "Juli 2020 – Mei 2023"
+          },
+          {
+            "institution": "Universitas Yatsi Madani",
+            "location": "Kabupaten Tangerang",
+            "program": "Jurusan Ilmu Komputer",
+            "duration": "September 2023 – Sekarang"
+          }
+        ],
+        "organizations": [
+          {
+            "name": "PMII",
+            "duration": "2024 – Sekarang",
+            "role": "Anggota"
+          },
+          {
+            "name": "MAPALA HIMAPASTI",
+            "duration": "2024 – Sekarang",
+            "role": "Anggota"
+          }
+        ]
+      };
+
+      // Populate Data
+      document.getElementById("profilePicture").src = resumeData.profile.photo_url;
+      document.getElementById("name").textContent = resumeData.profile.name;
+      document.getElementById("position").textContent = resumeData.profile.position;
+      document.getElementById("location").textContent = resumeData.profile.contact.location;
+      document.getElementById("phone").textContent = resumeData.profile.contact.phone;
+      document.getElementById("email").textContent = resumeData.profile.contact.email;
+      document.getElementById("summary").textContent = resumeData.summary;
+
+      // Skills
+      const technicalSkills = document.getElementById("technicalSkills");
+      resumeData.skills.technical.forEach(skill => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        technicalSkills.appendChild(li);
+      });
+
+      const nonTechnicalSkills = document.getElementById("nonTechnicalSkills");
+      resumeData.skills.non_technical.forEach(skill => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        nonTechnicalSkills.appendChild(li);
+      });
+
+      // Work Experience
+      const workExperience = document.getElementById("workExperience");
+      resumeData.work_experience.forEach(job => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p class="font-semibold">${job.duration}</p>
+          <p class="font-bold">${job.company}</p>
+          <p>${job.position}</p>
+          <ul class="list-disc list-inside">
+            ${job.responsibilities.map(res => `<li>${res}</li>`).join("")}
+          </ul>
+        `;
+        workExperience.appendChild(div);
+      });
+
+      // Education
+      const education = document.getElementById("education");
+      resumeData.education.forEach(edu => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p class="font-semibold">${edu.duration}</p>
+          <p>${edu.program}</p>
+          <p>${edu.institution}</p>
+        `;
+        education.appendChild(div);
+      });
+
+      // Organizations
+      const organizations = document.getElementById("organizations");
+      resumeData.organizations.forEach(org => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <p class="font-semibold">${org.duration}</p>
+          <p class="font-bold">${org.name}</p>
+          <p>Peran: ${org.role}</p>
+        `;
+        organizations.appendChild(div);
+      });
+    </script>
+  </body>
+</html>
